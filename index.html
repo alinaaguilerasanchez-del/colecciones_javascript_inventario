@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colecciones en JavaScript - Inventario de Comida</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="hero">
+      <span class="badge">JavaScript · Colecciones</span>
+      <h1>Sistema de Inventario de Comida</h1>
+      <p>Aplicación real para administrar comidas y bebidas con Array, Set, Map y Queue.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <h2>Registrar producto</h2>
+      <form id="productForm">
+        <div class="grid">
+          <label>Producto
+            <select id="nombre" required style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:9px;margin-top:7px;font-size:15px;background:#fff">
+              <option value="">Escoge un producto</option>
+            </select>
+          </label>
+          <label>Categoría
+            <input id="categoria" readonly required placeholder="Se completa automáticamente">
+          </label>
+          <label>Cantidad
+            <input id="cantidad" type="number" min="0" required placeholder="Ej. 10">
+          </label>
+          <label>Precio unitario
+            <input id="precio" type="number" min="0" step="0.01" readonly required placeholder="Se completa automáticamente">
+          </label>
+        </div>
+        <button type="submit">Agregar producto</button>
+      </form>
+    </section>
+
+    <section class="stats">
+      <div><strong id="totalProductos">0</strong><span>Productos</span></div>
+      <div><strong id="unidades">0</strong><span>Unidades</span></div>
+      <div><strong id="categorias">0</strong><span>Categorías</span></div>
+      <div><strong id="valorInventario">$0.00</strong><span>Valor inventario</span></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">
+        <div>
+          <h2>Inventario</h2>
+          <p>Las comidas y bebidas se administran mediante un <b>Map</b>.</p>
+        </div>
+        <button class="secondary" id="vaciarBtn">Vaciar inventario</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Producto</th><th>Categoría</th><th>Cantidad</th><th>Precio</th><th>Valor</th><th>Acción</th></tr>
+          </thead>
+          <tbody id="tablaProductos"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="two-columns">
+      <div class="panel">
+        <h2>Categorías únicas</h2>
+        <p>Se utiliza un <b>Set</b> para evitar categorías repetidas.</p>
+        <div id="listaCategorias" class="chips"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Pedidos pendientes: fila de atención</h2>
+        <p>Se utiliza una <b>Queue</b> mediante un Array con comportamiento FIFO.</p>
+        <form id="pedidoForm" class="inline-form">
+          <select id="pedido" required style="flex:1;width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:9px;font-size:15px;background:#fff">
+            <option value="">Escoge un producto para agregar</option>
+          </select>
+          <button type="submit">Agregar pedido</button>
+        </form>
+        <p id="colaEstado" class="hint">No hay pedidos pendientes.</p>
+        <ol id="colaPedidos"></ol>
+        <button class="secondary" id="atenderBtn">Atender siguiente pedido</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Pedidos atendidos</h2>
+      <p>Aquí aparecen los pedidos que ya salieron de la fila de pendientes.</p>
+      <p id="historialEstado" class="hint">Todavía no se ha atendido ningún pedido.</p>
+      <ul id="historialPedidos"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>Demostración de colecciones</h2>
+      <div class="collection-cards">
+        <article><b>Array (List)</b><p>Guarda la lista de pedidos y permite recorrerlos en orden.</p></article>
+        <article><b>Set</b><p>Conserva categorías únicas sin duplicados.</p></article>
+        <article><b>Map</b><p>Relaciona cada comida con su categoría, cantidad y precio.</p></article>
+        <article><b>Queue</b><p>Atiende pedidos en orden de llegada: primero en entrar, primero en salir.</p></article>
+      </div>
+    </section>
+
+    <section class="panel qr-panel">
+      <h2>Ver el programa mediante código QR</h2>
+      <p>Cuando publiques esta carpeta en una página web, coloca aquí su dirección y genera el QR. Al escanearlo desde el celular se abrirá el programa.</p>
+      <div class="qr-controls">
+        <input id="urlQR" type="url" placeholder="https://tu-sitio.com/inventario/">
+        <button id="generarQR">Generar QR</button>
+      </div>
+      <div id="qr"></div>
+      <p id="qrMensaje" class="hint"></p>
+      <button id="ocultarQR" class="secondary" hidden>Ya lo escaneé, ocultar QR</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>Proyecto académico · Inventario de comidas y bebidas con colecciones</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
